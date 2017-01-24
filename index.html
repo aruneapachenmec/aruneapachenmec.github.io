@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Rails Best Practices</h1>										
+				</section>
+				<section>
+					<h3>Thin Controllers and Fat Models</h3>
+					<p> Alway write <strong>business logic</strong> in the models. Keep the number of lines in controller to a minimum.</p>
+				</section>
+				<section>
+					<h5>Use permitted params when updating or creating a record</h3>
+					<p>
+						<strong>Use Patient.update_attributes(patient_params)</strong> 
+					</p>
+					instead of 
+					<p>
+					<strong>Patient.update_attributes(first_name: 'Arun',...)</strong>
+					</p>
+					<p>Always use <strong>update_attributes</strong> to update a record.</p>
+				</section>
+				<section>
+					<h5>Do not modify params.</h3>
+					<p>If required make a copy or clone of the params and use as per requirement.</p>
+				</section>				
+				<section>
+					<h5>Never use default scopes.</h5>
+				</section>
+				<section>
+					<h5>Use macro style grouping</h5>
+					<a href="https://github.com/bbatsov/rails-style-guide#macro-style-methods">Format Example</a>
+				</section>
+				<section>
+					<h5>Many to Many Association</h5>
+					<p>Prefer <strong>has_many: , through</strong></p>
+					instead of 
+					<p><strong>has_and belongs_to_many</strong></p>
+					<p>Allows us to have a model and more control over the data in intermediate table.</p>					
+				</section>
+				<section>
+					<h5>find_each over each</h5>
+					<p>While looping through a large number of records and doing a process over each record, always use find_each insead of each.</p>
+					<a href="https://github.com/bbatsov/rails-style-guide#find-each">Example</a>
+				</section>
+				<section>
+					<h5>Use named placeholders</h5>
+					<p>
+						<strong>
+							Client.where('created_at >= ? AND created_at <= ?',params[:start_date], params[:end_date])
+						</strong>
+					</p>
+					better use
+					<p>
+						<strong>
+							Client.where('created_at >= :start_date AND created_at <= :end_date',start_date: params[:start_date], end_date: params[:end_date])
+						</strong>
+					</p>
+					<a href="https://github.com/bbatsov/rails-style-guide#named-placeholder">Example</a>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		<style type="text/css">
+			strong{
+				color: green;
+			}
+		</style>
+	</body>
+</html>
