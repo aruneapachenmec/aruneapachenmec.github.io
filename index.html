@@ -97,9 +97,9 @@
 				<section>
 					<p>Commit messages, Why it was done, not what was implemented.</p>
 				</section>
-				<section>
+				<section id="snowflakeContainer">
+					<p class="snowflake">*</p>
 					<h5><strong>Thank YOU :D</strong></h5>
-					<img src="images/shahana.jpeg">
 				</section>
 
 			</div>
@@ -107,6 +107,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/fallingsnow_v6.js"></script>
+
 
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
@@ -125,6 +127,24 @@
 		<style type="text/css">
 			strong{
 				color: green;
+			}
+			#snowflakeContainer {
+		    position: absolute;
+		    left: 0px;
+		    top: 0px;
+			}
+			.snowflake {
+		    padding-left: 15px;
+		    font-family: Cambria, Georgia, serif;
+		    font-size: 14px;
+		    line-height: 24px;
+		    position: fixed;
+		    color: #FFFFFF;
+		    user-select: none;
+		    z-index: 1000;
+			}
+			.snowflake:hover {
+			  cursor: default;
 			}
 		</style>
 	</body>
